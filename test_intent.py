@@ -1,34 +1,28 @@
-import streamlit as st
+import os
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
-# Ensure page configuration is set first
-st.set_page_config(page_title="ChatWise AI Tutor", page_icon="🎓", layout="wide")
+load_dotenv()
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-from auth import render_auth_page, render_profile_page
-from chat import render_chat_page
+prompt = "what is history in india"
+validation_rule = "Accept only programming, software development, debugging, algorithms, DSA, Git, Linux, and tech-related queries (Python, Java, C++, JS, HTML, CSS, SQL). Reject History, Politics, Movies, Sports, Medical, Travel, etc."
 
-def init_session_state():
-    if "logged_in" not in st.session_state:
-        st.session_state.logged_in = False
-    if "username" not in st.session_state:
-        st.session_state.username = None
-    if "page" not in st.session_state:
-        st.session_state.page = "auth"
-    if "current_chat_id" not in st.session_state:
-        st.session_state.current_chat_id = None
+schema = {"type": "OBJECT", "properties": {"valid": {"type": "BOOLEAN"}}}
+config = types.GenerateContentConfig(
+    response_mime_type="application/json",
+    response_schema=schema,
+    system_instruction=f"You are an intent classifier. Evaluate the user's prompt based strictly on this rule: {validation_rule}. Return JSON with valid=true if it matches, and valid=false if it should be rejected.",
+    temperature=0.0
+)
 
-def main():
-    load_dotenv()
-    init_session_state()
-    
-    if not st.session_state.logged_in:
-        render_auth_page()
-    else:
-        # Enforce page routing for authenticated users
-        if st.session_state.page == "profile":
-            render_profile_page()
-        else:
-            render_chat_page()
-
-if __name__ == "__main__":
-    main()
+try:
+    response = client.models.generate_content(
+        model="gemini-1.5-flash",
+        contents=prompt,
+        config=config
+    )
+    print("Response:", response.text)
+except Exception as e:
+    print("Exception:", e)
