@@ -2,7 +2,7 @@
 
 > **An AI-powered multi-persona learning assistant built with Python, Streamlit, and Google Gemini API.**
 
-ChatWise is an intelligent chatbot that provides personalized learning experiences through specialized AI experts. Unlike traditional chatbots, ChatWise allows users to switch between multiple AI personas such as Coding Expert, Python Mentor, AI Tutor, Teacher, Student Assistant, Translator, Career Advisor, and more.
+simple-ai-chatbot is an intelligent chatbot that provides personalized learning experiences through specialized AI experts. Unlike traditional chatbots, ChatWise allows users to switch between multiple AI personas such as Coding Expert, Python Mentor, AI Tutor, Teacher, Student Assistant, Translator, Career Advisor, and more.
 
 The system combines **authentication**, **context-aware conversations**, **intent validation**, **streaming AI responses**, and **conversation management** to create a modern AI learning platform.
 
