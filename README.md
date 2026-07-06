@@ -97,7 +97,8 @@ Instead of answering incorrectly, ChatWise politely asks users to switch to the 
 
 | Login | Chat | Profile |
 |-------|------|---------|
-| *(Image)* | *(Image)* | *(Image)* |
+| <img width="1906" height="897" alt="image" src="https://github.com/user-attachments/assets/3825db80-3377-4a23-a2c2-363bffbeffaf" />
+| *(Image)* | *(Image)* |
 
 ---
 
